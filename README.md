@@ -5,7 +5,7 @@
 ## Running the tests
 
 1. Checkout the repository
-2. Install required dependencies (possibly in a virtual environment)
+2. Install required dependencies (possibly in a virtual environment*)
 ```
 pip install -r requirements.txt
 ```
@@ -13,6 +13,7 @@ pip install -r requirements.txt
 4. Copy the `.env.sample` file to `.env` and adjust the parameters
 5. Run the `test_runner.py`
 
+\* Setting up venv: `python3 -m venv venv` and `source venv/bin/activate`
 
 
 ## Adding dependencies

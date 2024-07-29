@@ -35,7 +35,7 @@ class Cvc5_8bitBenchmark(TestBase):
 
             with utils.timer() as elapsed:
                 cmd = f"{cvc5_path} {full_path}"
-                timeout_cmd = f"timeout {utils.get_test_timeout()} {cmd}"
+                timeout_cmd = f"timeout -s SIGKILL {utils.get_test_timeout()} {cmd}"
                 self.log(f"Running command: {timeout_cmd}", 2)
                 try:
                     p = subprocess.run(timeout_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -45,7 +45,7 @@ class Cvc5_8bitBenchmark(TestBase):
                     continue
                 output = p.stdout.decode('utf-8')
 
-                if "cvc5 interrupted" in output:
+                if utils.is_returncode_timeout(p.returncode):
                     self.log(f"{filename} timed out", 1)
                     results[filename] = "timeout"
                 else:

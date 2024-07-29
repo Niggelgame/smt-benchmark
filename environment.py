@@ -12,7 +12,3 @@ def load_environment():
     environment["LOG_LEVEL"] = 0 if os.getenv("LOG_LEVEL") is None else int(os.getenv("LOG_LEVEL"))
 
     environment["CVC5_PATH"] = os.getenv("CVC5_PATH")
-
-
-
-    pass

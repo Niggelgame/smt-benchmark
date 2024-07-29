@@ -72,7 +72,7 @@ class HackSynthBenchmark_Base(TestBase):
             
             # run the tests
             with utils.timer() as elapsed:
-                script = f"""cd {path} && timeout {utils.get_test_timeout()} {python} {self.get_test_runner()} {' '.join(self.get_params())}"""
+                script = f"""cd {path} && timeout -s SIGKILL {utils.get_test_timeout()} {python} {self.get_test_runner()} {' '.join(self.get_params())}"""
                 self.log(f"Running command: {script}", 2)
                 try:
                     p = subprocess.run(script, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -82,7 +82,8 @@ class HackSynthBenchmark_Base(TestBase):
                     return
                 output = p.stdout.decode('utf-8')
 
-                if p.returncode == 124:
+                # timeout code predefined by the system
+                if utils.is_returncode_timeout(p.returncode):
                     self.log(f"timed out", 1)
                     results = "timeout"
                 else:

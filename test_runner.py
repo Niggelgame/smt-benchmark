@@ -53,8 +53,13 @@ def run_benchmark(benchmark, arguments):
 
 
 def run():
+    print("Starting Benchmark")
     # load the environment
+    print("Loading environment")
     environment.load_environment()
+    runner_log(f"Got environment {environment.environment}", 1)
+
+    
 
     # parse additional arguments
     arguments = parse_args()

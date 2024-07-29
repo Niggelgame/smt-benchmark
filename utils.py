@@ -13,6 +13,9 @@ def get_temp_dir():
 def get_own_python_executable():
     return sys.executable
 
+def is_returncode_timeout(returncode):
+    return returncode == 137 or returncode == -9 or returncode == 124
+
 @contextmanager
 def timer():
     start = time.perf_counter_ns()

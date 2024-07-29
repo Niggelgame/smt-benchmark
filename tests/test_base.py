@@ -5,7 +5,7 @@ class TestBase:
     def get_info(self):
         pass
 
-    def run_test(self, environment):
+    def run_test(self):
         pass
 
 
