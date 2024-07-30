@@ -1,5 +1,6 @@
 from tests.hacksynth_benchmark_base import HackSynthBenchmark_Base
 
+# Disabled Test case.
 class SampleHacksynthBench(HackSynthBenchmark_Base):
     def get_info(self):
         base = super().get_info()

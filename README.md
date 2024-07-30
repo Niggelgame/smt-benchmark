@@ -45,4 +45,4 @@ pip freeze > requirements.txt
 
 ## Creating a new test (suite)
 1. Create a new file in the `tests` directory (if it is only a base for more tests, suffix it with '_base.py')
-2. Implement the test as a class that inherits from `TestBase` and implements the `get_info` and `run` method. See the documentation of the `TestBase` class for more information.
+2. Implement the test as a class that inherits from `TestBase` and implements the `get_info` and `run` method. See the documentation of the `TestBase` class for more information. (e. g. check out the `tests/sample_hacksynth_bench.py`)
