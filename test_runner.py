@@ -6,6 +6,9 @@ def parse_args():
     import argparse
     parser = argparse.ArgumentParser(prog="test_runner")
     parser.add_argument("-b", "--benchmark", help="Run a specific benchmark")
+    parser.add_argument("-o", "--output", help="Output file for the results")
+    parser.add_argument("-i", "--intermediate_output", default=False, action='store_true', help="Output intermediate results. Only works with specified output file")
+    parser.add_argument("-r", "--repeats", type=int, default=1, help="Specify how often each test suite should be run to get more consistent results")
     return parser.parse_args()
 
 def runner_log(msg, lvl):
@@ -30,6 +33,11 @@ def run_benchmark(benchmark, arguments):
     benchmark = load_benchmark_module(benchmark)
 
     name = benchmark.get_info()["name"]
+
+    if "enabled" in benchmark.get_info() and benchmark.get_info()["enabled"] == False:
+        runner_log(f"Benchmark {name} is disabled", 0)
+        return
+
     runner_log(f"Running benchmark: {name}", 0)
     runner_log(f"Test Info: {benchmark.get_info()}", 1)
 
@@ -59,10 +67,12 @@ def run():
     environment.load_environment()
     runner_log(f"Got environment {environment.environment}", 1)
 
-    
-
     # parse additional arguments
     arguments = parse_args()
+
+    if arguments.output is not None:
+        runner_log(f"Outputting results to: {arguments.output} [Clearing File]", 0)
+        open(arguments.output, 'w').close()
 
     tests_directory = os.path.join(os.path.dirname(__file__), "tests")
 
@@ -79,15 +89,39 @@ def run():
             runner_log(f"Found multiple benchmarks with the name: {arguments.benchmark}", 0)
             return
 
-        run_benchmark(test[0], arguments)
+        for _ in range(0, arguments.repeats):
+            run_benchmark(test[0], arguments)
+
+            # Write intermediate results if requested
+            if arguments.intermediate_output and arguments.output is not None:
+                with open(arguments.output, 'a') as f:
+                    f.write(str(benchmark_results) + "\n\n")
+
+        # write results to file
+        if arguments.output is not None:
+            with open(arguments.output, 'a') as f:
+                f.write(str(benchmark_results))
         return
 
     for benchmark in test_files:
         # base files are only used for inheritance
         if benchmark.endswith("_base.py"):
             continue
-        run_benchmark(benchmark, arguments)
 
+        # Run benchmark `range` times
+        for _ in range(0, arguments.repeats):
+            run_benchmark(benchmark, arguments)
+        
+            # Write intermediate results if requested
+            if arguments.intermediate_output and arguments.output is not None:
+                with open(arguments.output, 'a') as f:
+                    f.write(str(benchmark_results) + "\n\n")
+        
+
+    # write results to file
+    if arguments.output is not None:
+        with open(arguments.output, 'a') as f:
+            f.write(str(benchmark_results))
     
     
 

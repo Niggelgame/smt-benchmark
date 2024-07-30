@@ -1,6 +1,7 @@
 
 import os
 import subprocess
+from environment import environment
 from tests.test_base import TestBase
 import utils
 
@@ -91,7 +92,7 @@ class HackSynthBenchmark_Base(TestBase):
             for test_case in test_cases:
                 self.log(f"Running test: {test_case}", 1)
                 with utils.timer() as elapsed:
-                    script = f"""cd {path} && timeout -s SIGKILL {utils.get_test_timeout()} {python} -t {test_case} {self.get_test_runner()} {' '.join(self.get_params())}"""
+                    script = f"""cd {path} && timeout -s SIGKILL {utils.get_test_timeout()} {python} {self.get_test_runner()} -t {test_case} {' '.join(self.get_params())}"""
                     self.log(f"Running command: {script}", 2)
                     try:
                         p = subprocess.run(script, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -111,5 +112,6 @@ class HackSynthBenchmark_Base(TestBase):
             
             return results
         finally:
-            # remove the temp directory
-            os.system(f'rm -rf "{path}"')
+            if not environment["KEEP_TEMP"]:
+                # remove the temp directory
+                os.system(f'rm -rf "{path}"')

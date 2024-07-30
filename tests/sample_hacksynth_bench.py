@@ -4,6 +4,7 @@ class SampleHacksynthBench(HackSynthBenchmark_Base):
     def get_info(self):
         base = super().get_info()
         base["name"] = "sample-hacksynth-bench"
+        base["enabled"] = False
         return base
     
 def create_test():

@@ -2,3 +2,6 @@ temp/**
 .env
 venv/**
 **/__pycache__/** 
+output/**
+outfile
+logfile
