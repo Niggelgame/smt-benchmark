@@ -33,6 +33,7 @@ The following parameters can be set via the command line:
 | `--intermediate_output / -i` | Write intermediate results to the output file | `False` |
 | `--repeats / -r {number}` | Repeat the tests this number of times | `1` |
 
+-> To log the outputs of the benchmark runs to a file, use `{run command} > logfile.txt 2>&1`
 
 ## Adding dependencies
 
