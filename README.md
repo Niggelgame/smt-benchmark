@@ -28,7 +28,7 @@ The following parameters can be set in the `.env` file:
 The following parameters can be set via the command line:
 | Parameter | Description | Default |
 | --- | --- | --- |
-| `--benchmark / -b {Test case}` | Just run this test case  | `None` |
+| `--benchmark / -b {Test case}` | Just run this test case. Comma separated for multiple tests  | `None` |
 | `--output / -o {Output file}` | Write the results to this file | `None` |
 | `--intermediate_output / -i` | Write intermediate results to the output file | `False` |
 | `--repeats / -r {number}` | Repeat the tests this number of times | `1` |

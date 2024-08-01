@@ -27,7 +27,11 @@ def load_benchmark_module(benchmark):
     return benchmark_module.create_test()
 
 
+# object containing all benchmark results
 benchmark_results = {}
+
+# output object containing additional metadata
+output = {}
 
 def run_benchmark(benchmark, arguments):
     benchmark = load_benchmark_module(benchmark)
@@ -57,8 +61,23 @@ def run_benchmark(benchmark, arguments):
     benchmark_results[name].append(results)
 
 
+def write_intermediate(arguments):
+    # Write intermediate results if requested
+    if arguments.intermediate_output and arguments.output is not None:
+        with open(arguments.output, 'a') as f:
+            f.write(str(benchmark_results) + "\n\n")
 
 
+def write_output(arguments):
+    output["results"] = benchmark_results
+    output["arguments"] = ' '.join(f'{k}={v}' for k, v in vars(arguments).items())
+    output["environment"] = environment.environment
+
+
+    # write results to file
+    if arguments.output is not None:
+        with open(arguments.output, 'a') as f:
+            f.write(str(output))
 
 def run():
     print("Starting Benchmark")
@@ -81,26 +100,21 @@ def run():
 
     # run a specific benchmark?
     if arguments.benchmark is not None:
-        test = [file for file in test_files if arguments.benchmark in file]
-        if len(test) == 0:
-            runner_log(f"Could not find benchmark: {arguments.benchmark}", 0)
-            return
-        elif len(test) > 1:
-            runner_log(f"Found multiple benchmarks with the name: {arguments.benchmark}", 0)
-            return
+        for benchmark in arguments.benchmark.split(","):
+            test = [file for file in test_files if benchmark in file]
+            if len(test) == 0:
+                runner_log(f"Could not find benchmark: {benchmark}", 0)
+                continue
+            elif len(test) > 1:
+                runner_log(f"Found multiple benchmarks with the name: {benchmark}", 0)
+                continue
 
-        for _ in range(0, arguments.repeats):
-            run_benchmark(test[0], arguments)
+            for _ in range(0, arguments.repeats):
+                run_benchmark(test[0], arguments)
 
-            # Write intermediate results if requested
-            if arguments.intermediate_output and arguments.output is not None:
-                with open(arguments.output, 'a') as f:
-                    f.write(str(benchmark_results) + "\n\n")
+                write_intermediate(arguments)
 
-        # write results to file
-        if arguments.output is not None:
-            with open(arguments.output, 'a') as f:
-                f.write(str(benchmark_results))
+        write_output(arguments)
         return
 
     for benchmark in test_files:
@@ -112,19 +126,13 @@ def run():
         for _ in range(0, arguments.repeats):
             run_benchmark(benchmark, arguments)
         
-            # Write intermediate results if requested
-            if arguments.intermediate_output and arguments.output is not None:
-                with open(arguments.output, 'a') as f:
-                    f.write(str(benchmark_results) + "\n\n")
+            write_intermediate(arguments)
         
 
-    # write results to file
-    if arguments.output is not None:
-        with open(arguments.output, 'a') as f:
-            f.write(str(benchmark_results))
+    write_output(arguments)
     
     
 
 if __name__ == "__main__":
     run()
-    print(benchmark_results)
+    print(output)

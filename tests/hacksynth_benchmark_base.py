@@ -55,6 +55,11 @@ class HackSynthBenchmark_Base(TestBase):
             script = f"""cd {repo_path} && git checkout {branch}"""
         else:
             script = f"""cd {repo_path} && git checkout {commit}"""
+        try:
+            os.system(script)
+        except Exception as e:
+            self.log(f"Error checking out commit: {e}", 0)
+            return
         
         return repo_path
         
