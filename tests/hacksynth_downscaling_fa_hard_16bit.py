@@ -16,7 +16,7 @@ class HacksynthDownscalingFA(HackSynthBenchmark_Base):
         return base
 
     def get_params(self):
-        return super().get_params() + ["-s synth_constants_fa_stage"]
+        return super().get_params() + ["-s synth_constants_fa_stage", "-y 40 -c FREE", "-b 16"]
     
 def create_test():
     return HacksynthDownscalingFA()

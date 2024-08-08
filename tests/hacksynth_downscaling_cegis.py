@@ -12,11 +12,11 @@ class HacksynthDownscalingCegis(HackSynthBenchmark_Base):
     
     def get_git_info(self):
         base = super().get_git_info()
-        base["branch"] = "downsizing"
+        base["branch"] = "main"
         return base
 
     def get_params(self):
-        return super().get_params() + ["--downsize", "-s synth_constants_cegis_stage"]
+        return super().get_params() + ["-s synth_constants_cegis_stage"]
     
 def create_test():
     return HacksynthDownscalingCegis()
