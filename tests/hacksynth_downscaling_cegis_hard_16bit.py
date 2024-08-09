@@ -3,7 +3,7 @@ from tests.hacksynth_benchmark_base import HackSynthBenchmark_Base
 class HacksynthDownscalingCegis(HackSynthBenchmark_Base):
     def get_info(self):
         base = super().get_info()
-        base["name"] = "HacksynthDownscalingCegis"
+        base["name"] = "HacksynthDownscalingCegis16"
         base["description"] = "hacksynth benchmark, with downscaling, where second stage uses cegis"
         return base
     
