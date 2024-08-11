@@ -10,5 +10,9 @@ class HacksynthHackdelExtendedSygus(HackSynthBenchmark_Base):
     def get_test_runner(self):
         return 'hackdel_sygus_spec.py'
     
+
+    def get_params(self):
+        return ['-c SET']
+
 def create_test():
     return HacksynthHackdelExtendedSygus()

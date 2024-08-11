@@ -11,7 +11,8 @@ class Cvc5_8bitBenchmark(TestBase):
             "required_environment": ["CVC5_PATH"],
         }
 
-
+    def get_files_dir(self):
+        return utils.get_root_path() + "/resources/sygus-hd-8bit"
 
     def run_test(self):
         import os
@@ -20,7 +21,7 @@ class Cvc5_8bitBenchmark(TestBase):
         cvc5_path = environment["CVC5_PATH"]
 
 
-        files_dir = utils.get_root_path() + "/resources/sygus-hd-8bit"
+        files_dir = self.get_files_dir()
         # get files in directory
 
         results = {}
