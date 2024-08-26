@@ -8,7 +8,7 @@ class HacksynthDownscalingCegis(HackSynthBenchmark_Base):
         return base
     
     def get_test_runner(self):
-        return 'hackdel.py'
+        return 'bitvec_benchmarks/hackdel.py'
     
     def get_git_info(self):
         base = super().get_git_info()

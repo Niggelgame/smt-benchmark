@@ -7,7 +7,7 @@ class HacksynthStdHackdelBenchmark(HackSynthBenchmark_Base):
         return base
     
     def get_test_runner(self):
-        return 'hackdel.py'
+        return 'bitvec_benchmarks/hackdel.py'
     
 def create_test():
     return HacksynthStdHackdelBenchmark()

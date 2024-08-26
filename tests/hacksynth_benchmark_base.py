@@ -14,7 +14,7 @@ class HackSynthBenchmark_Base(TestBase):
         }
     
     def get_test_runner(self):
-        return "hackdel.py"
+        return "bitvec_benchmarks/hackdel.py"
     
     def get_params(self):
         return []

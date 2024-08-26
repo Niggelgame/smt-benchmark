@@ -8,7 +8,7 @@ class HacksynthHackdelExtendedSygus(HackSynthBenchmark_Base):
         return base
     
     def get_test_runner(self):
-        return 'hackdel_sygus_spec.py'
+        return 'bitvec_benchmarks/hackdel_sygus_spec.py'
     
 
     def get_params(self):
