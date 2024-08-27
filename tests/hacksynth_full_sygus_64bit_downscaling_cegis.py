@@ -8,7 +8,7 @@ class HacksynthHackdelFullSygus(HackSynthBenchmarkDownscaling_Base):
         return base
     
     def get_test_runner(self):
-        return 'bitvec_benchmarks/from_sygus_spec_hackdel_32bit.py'
+        return 'bitvec_benchmarks/from_sygus_spec_hackdel_64bit.py'
     
 
     def get_params(self):
