@@ -80,6 +80,8 @@ class HackSynthBenchmark_Base(TestBase):
             test_cases = output.strip().split(",")
             return test_cases
 
+    def success_output(self, bench_path, testcase):
+        pass
 
     def run_test(self):
         path = self.clone_to_temp()
@@ -114,6 +116,7 @@ class HackSynthBenchmark_Base(TestBase):
                     else:
                         self.log(f"Output: {output}", 3)
                         results[test_case] = elapsed()
+                        self.success_output(path, test_case)
             
             return results
         finally:

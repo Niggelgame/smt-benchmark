@@ -12,7 +12,7 @@ class HacksynthHackdelFullSygus(HackSynthBenchmark_Base):
     
 
     def get_params(self):
-        return ['-c SET', "-s synth_constants_cegis_stage"]
+        return super().get_params() + ['-c SET', "-s synth_constants_cegis_stage"]
     
 def create_test():
     return HacksynthHackdelFullSygus()

@@ -1,9 +1,9 @@
-from tests.hacksynth_benchmark_base import HackSynthBenchmark_Base
+from tests.hacksynth_benchmark_downscaling_base import HackSynthBenchmarkDownscaling_Base
 
-class HacksynthDownscalingCegis(HackSynthBenchmark_Base):
+class HacksynthDownscalingCegis(HackSynthBenchmarkDownscaling_Base):
     def get_info(self):
         base = super().get_info()
-        base["name"] = "HacksynthDownscalingCegis"
+        base["name"] = "HacksynthDownscalingCegisHard"
         base["description"] = "hacksynth benchmark, with downscaling, where second stage uses cegis"
         return base
     

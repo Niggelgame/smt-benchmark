@@ -1,6 +1,6 @@
-from tests.hacksynth_benchmark_base import HackSynthBenchmark_Base
+from tests.hacksynth_benchmark_downscaling_base import HackSynthBenchmarkDownscaling_Base
 
-class HacksynthDownscalingFA(HackSynthBenchmark_Base):
+class HacksynthDownscalingFA(HackSynthBenchmarkDownscaling_Base):
     def get_info(self):
         base = super().get_info()
         base["name"] = "HacksynthDownscalingFA"
