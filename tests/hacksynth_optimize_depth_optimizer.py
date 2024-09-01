@@ -14,21 +14,30 @@ class HacksynthOptimizeDepthOptimizer(HackSynthBenchmark_Base):
         base = super().get_git_info()
         base["branch"] = "main"
         return base
+    
+    def get_solver_name(self):
+        return 'synth_n_optimize_temp'
 
     def get_params(self):
         # Fixed length of 8, as this is the maximal length needed
-        return super().get_params() + ["-l 8", "-L 8", "-s synth_n_optimize"]
-    
-    def clone_to_temp(self):
-        path = super().clone_to_temp()
-
-        # replace the optimization case
-        with open(f"{path}/synth_n_optimize.py", "r+") as file:
-            data = file.read()
-            file.seek(0)
-            file.write(data.replace("{{CAN_BE_REPLACED_BY_BENCHMARK}}", "simple_depth_optimization"))
+        return super().get_params() + ["-l 8", "-L 8", f"-s {self.get_solver_name()}"]
         
-        return path
+    def run_test(self):
+        path = self.clone_to_temp()
+
+        results = {}
+        
+        optimizers = ["simple_depth_optimization", "iterated_depth_optimization"]
+
+        for optimizer in optimizers:
+            # replace the optimization case
+            with open(f"{path}/synth_n_optimize.py", "r+") as file:
+                data = file.read()
+            
+            with open(f"{path}/{self.get_solver_name()}.py", "w") as file:
+                file.write(data.replace("{{CAN_BE_REPLACED_BY_BENCHMARK}}", optimizer))
+
+            results[optimizer] = self.execute_tests(path)
     
 def create_test():
     return HacksynthOptimizeDepthOptimizer()

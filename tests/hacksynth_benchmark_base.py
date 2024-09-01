@@ -83,11 +83,8 @@ class HackSynthBenchmark_Base(TestBase):
     def success_output(self, bench_path, testcase):
         pass
 
-    def run_test(self):
-        path = self.clone_to_temp()
-
+    def execute_tests(self, path):
         results = {}
-        
         # run the tests
         try:
             # get own python executable which includes z3
@@ -123,3 +120,10 @@ class HackSynthBenchmark_Base(TestBase):
             if not environment["KEEP_TEMP"]:
                 # remove the temp directory
                 os.system(f'rm -rf "{path}"')
+
+    def run_test(self):
+        path = self.clone_to_temp()
+
+        return self.execute_tests(path)
+        
+        
