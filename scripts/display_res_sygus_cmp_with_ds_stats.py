@@ -58,11 +58,13 @@ def draw_bar_plot(data, axis_ticks, output=None):
             finding_constants_times = [m['finding_constants_time'] if 'finding_constants_time' in m else 0 for m in measurement ]
             other_synth_times = [m['other_synth_time'] if 'other_synth_time' in m else 0 for m in measurement ]
 
-            ax.bar(x + offset, downscaled_synth_times, width, bottom=bottom, label=(runner+"ds_time"))
-            bottom += downscaled_synth_times
             ax.bar(x + offset, finding_constants_times, width, bottom=bottom, label=(runner+"const_time"))
             bottom += finding_constants_times
+            ax.bar(x + offset, downscaled_synth_times, width, bottom=bottom, label=(runner+"ds_time"))
+            bottom += downscaled_synth_times
             ax.bar(x + offset, other_synth_times, width, bottom=bottom, label=(runner+"other_time"))
+            bottom += other_synth_times
+            
 
         # print(runner, measurement, x + width * multiplier)
         # only take first measurement
@@ -162,4 +164,4 @@ draw_bar_plot(
      # double_array_format["HacksynthStdHackdelBenchmark"]
      ], 
      # [i for i in range(0, 44)], 
-     axis_ticks=merged_data["HacksynthHackdelFullSygus64"].keys(), output="output_cmp_sygus.svg")
+     axis_ticks=merged_data["HacksynthHackdelFullSygus64"].keys(), output="output_cmp_sygus_ds.svg")
