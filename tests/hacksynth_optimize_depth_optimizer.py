@@ -38,6 +38,8 @@ class HacksynthOptimizeDepthOptimizer(HackSynthBenchmark_Base):
                 file.write(data.replace("{{CAN_BE_REPLACED_BY_BENCHMARK}}", optimizer))
 
             results[optimizer] = self.execute_tests(path)
+        
+        return results
     
 def create_test():
     return HacksynthOptimizeDepthOptimizer()
