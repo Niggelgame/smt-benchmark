@@ -12,7 +12,7 @@ class HacksynthHackdelFullSygus(HackSynthBenchmark_Base):
     
 
     def get_params(self):
-        return ['-c SET']
+        return super().get_params() + ['-c SET']
     
 def create_test():
     return HacksynthHackdelFullSygus()
