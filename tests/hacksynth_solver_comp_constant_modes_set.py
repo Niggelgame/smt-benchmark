@@ -3,7 +3,7 @@ from tests.hacksynth_solver_comp import HacksynthSolverComp
 class HacksynthSolverCompConstantModesFree(HacksynthSolverComp):
     def get_info(self):
         base = super().get_info()
-        base["name"] = "HacksynthSolverCompConstantModes"
+        base["name"] = "HacksynthSolverCompConstantModesSet"
         return base
     
     def get_solver_file(self):

@@ -16,7 +16,7 @@ class HacksynthSolverComp(HackSynthBenchmark_Base):
         return super().get_params() + [f"-s {self.get_solver_file()}"]
     
     def run_test(self):
-        solver_methods = ["solve_external_yices", "solve_z3", "solve_external_bitwuzla", "solve_external_cvc5"]
+        solver_methods = ["solve_external_yices", "solve_z3", "solve_external_bitwuzla", "solve_external_cvc5", "solve_external_z3"]
 
         to_be_replaced = "solve=solve_z3"
         path = self.clone_to_temp()
