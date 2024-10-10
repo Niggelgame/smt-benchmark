@@ -70,8 +70,9 @@ results = {'HacksynthHackdelExtendedSygus': [{'p01_d1': 485306859, 'p01_d5': 113
 r = {'results': {'HacksynthStdHackdelBenchmarkBrahma': [{'p01': 422696856, 'p02': 1019827324, 'p03': 618294046, 'p04': 359579596, 'p05': 372752219, 'p06': 365235338, 'p07': 1571901036, 'p08': 1535458173, 'p09': 1283093825, 'p10': 1428873509, 'p11': 1320406904, 'p12': 1309012995, 'p13': 40143216232, 'p14': 7125434407, 'p15': 9613521565, 'p16': 10399364771, 'p17': 31500839130, 'p18': 956888216, 'p19': 221731682051, 'p20': 'timeout', 'p21': 'timeout', 'p22': 'timeout', 'p23': 'timeout', 'p24': 'timeout'}], 
                  #'HacksynthStdHackdelBenchmark': [{'p01': 414513493, 'p02': 814015189, 'p03': 485499114, 'p04': 379734915, 'p05': 410653511, 'p06': 392453823, 'p07': 694194635, 'p08': 932414591, 'p09': 829966609, 'p10': 949680029, 'p11': 779771452, 'p12': 889818224, 'p13': 2700928421, 'p14': 2122685835, 'p15': 2144246600, 'p16': 1329545394, 'p17': 2915764929, 'p18': 624130995, 'p19': 9131945077, 'p20': 'timeout', 'p21': 1362475807981, 'p22': 'timeout', 'p23': 'timeout', 'p24': 'timeout'}]
                  'HacksynthStdHackdelBenchmark': [{'p01': 414513493, 'p02': 814015189, 'p03': 485499114, 'p04': 379734915, 'p05': 410653511, 'p06': 392453823, 'p07': 694194635, 'p08': 932414591, 'p09': 829966609, 'p10': 949680029, 'p11': 779771452, 'p12': 889818224, 'p13': 2700928421, 'p14': 2122685835, 'p15': 2144246600, 'p16': 1329545394, 'p17': 2915764929, 'p18': 624130995, 'p19': 9131945077, 'p20': 'timeout', 'p21': 1362475807981, 'p22': 'timeout', 'p23': 'timeout', 'p24': 'timeout'}]}, 'arguments': 'benchmark=hacksynth_std_hackdel_benchmark_brahma.py,hacksynth_solver_sygus_comp.py,hacksynth_solver_comp_constant_modes_count.py,hacksynth_solver_comp_constant_modes_free.py,hacksynth_solver_comp_constant_modes_set.py output=brahma_otherdiff_cmp_constset_cmp intermediate_output=True repeats=1', 'environment': {'TIMEOUT': '1800s', 'LOG_LEVEL': 2, 'KEEP_TEMP': True, 'CVC5_PATH': '/home/edelmann/cvc5/cvc5-Linux-static/bin/cvc5'}}
+paper = {'results': {'HacksynthStdHackdelBenchmarkBrahmaPaper': [{'p01': 1738659593, 'p02': 35884761653, 'p03': 837017324, 'p04': 1050278080, 'p05': 3111701792, 'p06': 3040827701, 'p07': 16183441698, 'p08': 6048378227, 'p09': 48918563584, 'p10': 65068104791, 'p11': 28418232452, 'p12': 3038712487, 'p13': 1174725541, 'p14': 163945948188, 'p15': 129761542541, 'p16': 'timeout', 'p17': 209596049626, 'p18': 6942822701, 'p19': 'timeout', 'p20': 'timeout', 'p21': 'timeout', 'p22': 'timeout', 'p23': 'timeout', 'p24': 220644054857}]}, 'arguments': 'benchmark=hacksynth_std_hackdel_benchmark_brahma_paper.py output=brahma_paper_res intermediate_output=True repeats=1', 'environment': {'TIMEOUT': '1800s', 'LOG_LEVEL': 2, 'KEEP_TEMP': True, 'CVC5_PATH': '/home/edelmann/cvc5/cvc5-Linux-static/bin/cvc5'}}
 results = r['results']
-
+results['HacksynthStdHackdelBenchmarkBrahmaPaper'] = paper['results']['HacksynthStdHackdelBenchmarkBrahmaPaper']
 
 merged_data = {} # {benchmark_name: { test_name: [result1, result2, ...], test_name2: ...}}
 for (key, rounds) in results.items():
@@ -93,6 +94,7 @@ print(double_array_format)
 draw_bar_plot(
     [('HacksynthStdHackdelBenchmarkBrahma', double_array_format["HacksynthStdHackdelBenchmarkBrahma"]), 
      ('HacksynthStdHackdelBenchmark', double_array_format["HacksynthStdHackdelBenchmark"]), 
+     ('HacksynthStdHackdelBenchmarkBrahmaPaper', double_array_format["HacksynthStdHackdelBenchmarkBrahmaPaper"])
      # ('HacksynthDownscalingFA32', double_array_format["HacksynthDownscalingFA32"]), 
      # ('HacksynthStdHackdelBenchmark32', double_array_format["HacksynthStdHackdelBenchmark32"])
      ], 
