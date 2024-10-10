@@ -7,7 +7,7 @@ class HacksynthStdHackdelBenchmark(HackSynthBenchmark_Base):
         return base
     
     def get_params(self):
-        return super().get_params() + ["-s synth_brahma_paper"]
+        return super().get_params() + ["-s synth_brahma_paper -x"]
     
     def get_test_runner(self):
         return 'bitvec_benchmarks/hackdel.py'
