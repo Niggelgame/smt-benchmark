@@ -10,7 +10,7 @@ class HacksynthStdHackdelBenchmark(HackSynthBenchmark_Base):
         return 'bitvec_benchmarks/hackdel.py'
     
     def get_params(self):
-        return super().get_params() + ["-e"]
+        return super().get_params() + ["-x -c SET_COUNT"]
     
     
 def create_test():
