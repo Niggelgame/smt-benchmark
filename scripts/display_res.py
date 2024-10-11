@@ -73,6 +73,8 @@ r = {'results': {'HacksynthStdHackdelBenchmarkBrahma': [{'p01': 422696856, 'p02'
 paper = {'results': {'HacksynthStdHackdelBenchmarkBrahmaPaper': [{'p01': 1738659593, 'p02': 35884761653, 'p03': 837017324, 'p04': 1050278080, 'p05': 3111701792, 'p06': 3040827701, 'p07': 16183441698, 'p08': 6048378227, 'p09': 48918563584, 'p10': 65068104791, 'p11': 28418232452, 'p12': 3038712487, 'p13': 1174725541, 'p14': 163945948188, 'p15': 129761542541, 'p16': 'timeout', 'p17': 209596049626, 'p18': 6942822701, 'p19': 'timeout', 'p20': 'timeout', 'p21': 'timeout', 'p22': 'timeout', 'p23': 'timeout', 'p24': 220644054857}]}, 'arguments': 'benchmark=hacksynth_std_hackdel_benchmark_brahma_paper.py output=brahma_paper_res intermediate_output=True repeats=1', 'environment': {'TIMEOUT': '1800s', 'LOG_LEVEL': 2, 'KEEP_TEMP': True, 'CVC5_PATH': '/home/edelmann/cvc5/cvc5-Linux-static/bin/cvc5'}}
 results = r['results']
 results['HacksynthStdHackdelBenchmarkBrahmaPaper'] = paper['results']['HacksynthStdHackdelBenchmarkBrahmaPaper']
+results['HacksynthStdHackdelBenchmarkHard'] = [{'p01': 909042225, 'p02': 1978077730, 'p03': 1355255585, 'p04': 885121279, 'p05': 1007673925, 'p06': 933822675, 'p07': 1729542022, 'p08': 1621956917, 'p09': 2045918611, 'p10': 105708363072, 'p11': 25205620732, 'p12': 104399577683, 'p13': 3621686581, 'p14': 16675826252, 'p15': 7490137787, 'p16': 64640965294, 'p17': 4288572421, 'p18': 4724227590, 'p19': 'timeout', 'p20': 'timeout', 'p21': 'timeout', 'p22': 'timeout', 'p23': 'timeout', 'p24': 899804533023}]
+
 
 merged_data = {} # {benchmark_name: { test_name: [result1, result2, ...], test_name2: ...}}
 for (key, rounds) in results.items():
@@ -85,6 +87,30 @@ for (key, rounds) in results.items():
             data[test].append(it[test] / (10 ** 9) if it[test] != 'timeout' else 5000)
     merged_data[key] = data
 
+keys = ['HacksynthStdHackdelBenchmarkBrahma']
+# keys = ['cvc5-64bit-benchmark']
+diff = ""
+
+
+dat_data = [["test", "data"]]
+columns = []
+for test_name in merged_data[keys[0]].keys():
+    if not test_name.endswith(diff):
+        continue
+    dis_name = test_name.replace(diff, "")
+    columns.append(dis_name)
+    dat_data.append([dis_name] + [str(merged_data[key][test_name][0]) for key in keys])
+
+for line in dat_data:
+    print("\t".join(line))
+
+print()
+print("{" + (", ".join(columns)) + "}")
+
+
+# exit(0)
+
+
 double_array_format = {} # {benchmark_name: [[result1, result2, ...], [result1, result2, ...]]}
 for (key, data) in merged_data.items():
     double_array_format[key] = [v for v in data.values()]
@@ -93,7 +119,7 @@ print(double_array_format)
 
 draw_bar_plot(
     [('HacksynthStdHackdelBenchmarkBrahma', double_array_format["HacksynthStdHackdelBenchmarkBrahma"]), 
-     ('HacksynthStdHackdelBenchmark', double_array_format["HacksynthStdHackdelBenchmark"]), 
+     ('HacksynthStdHackdelBenchmarkHard', double_array_format["HacksynthStdHackdelBenchmarkHard"]), 
      ('HacksynthStdHackdelBenchmarkBrahmaPaper', double_array_format["HacksynthStdHackdelBenchmarkBrahmaPaper"])
      # ('HacksynthDownscalingFA32', double_array_format["HacksynthDownscalingFA32"]), 
      # ('HacksynthStdHackdelBenchmark32', double_array_format["HacksynthStdHackdelBenchmark32"])
