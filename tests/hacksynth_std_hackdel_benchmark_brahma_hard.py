@@ -1,7 +1,5 @@
 from tests.hacksynth_benchmark_base import HackSynthBenchmark_Base
 
-# benchmark files used to quickly rebench individual test cases
-
 class HacksynthStdHackdelBenchmark(HackSynthBenchmark_Base):
     def get_info(self):
         base = super().get_info()
