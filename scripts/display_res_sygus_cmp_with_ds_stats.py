@@ -122,7 +122,31 @@ def transform_ds_results(data):
 
 results['HacksynthHackdelFullSygusDownscaling64'] = transform_ds_results(results['HacksynthHackdelFullSygusDownscaling64'])
 
+# compute ratios
+for repetition in results['HacksynthHackdelFullSygusDownscaling64']:
+    for (testcase, times) in repetition.items():
+        if 'downscaled_synth_time' in times:
+            times['downscaled_synth_ratio'] = times['downscaled_synth_time'] / times['shell_time']
+            times['finding_constants_ratio'] = times['finding_constants_time'] / times['shell_time']
+            times['other_synth_ratio'] = times['other_synth_time'] / times['shell_time']
 
+length = len(results['HacksynthHackdelFullSygus64'][0])
+downscaled = 0
+finding_c = 0
+other = 0
+
+unaccounted = 0
+
+for (testcase, times) in results['HacksynthHackdelFullSygusDownscaling64'][0].items():
+    if 'downscaled_synth_time' in times:
+        downscaled += times['downscaled_synth_ratio']
+        finding_c += times['finding_constants_ratio']
+        other += times['other_synth_ratio']
+        
+print(downscaled / length, finding_c / length, other / length)
+print("unaccounted", unaccounted)
+
+# exit(0)
 
 merged_data = {} # {benchmark_name: { test_name: [result1, result2, ...], test_name2: ...}}
 for (key, rounds) in results.items():

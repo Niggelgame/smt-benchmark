@@ -87,7 +87,7 @@ for (key, rounds) in results.items():
             data[test].append(it[test] / (10 ** 9) if it[test] != 'timeout' else 5000)
     merged_data[key] = data
 
-keys = ['HacksynthStdHackdelBenchmarkBrahma']
+keys = ['HacksynthStdHackdelBenchmarkBrahmaPaper']
 # keys = ['cvc5-64bit-benchmark']
 diff = ""
 

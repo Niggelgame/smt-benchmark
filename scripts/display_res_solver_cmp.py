@@ -97,7 +97,9 @@ data_constant_modes = {'results': {'HacksynthSolverCompConstantModesCount': [{'s
 data_constant_modes = data_constant_modes['results']
 
 data = data_sygus_only['results']['HacksynthSolverSygusComp']
-# data = data_constant_modes['HacksynthSolverCompConstantModesCount']
+data = data_constant_modes['HacksynthSolverCompConstantModesSet']
+# data = data_hacksynth32
+
 
 results = {
     'solve_external_yices': [data[0]['solve_external_yices']],
@@ -106,6 +108,7 @@ results = {
     'solve_external_cvc5': [data[0]['solve_external_cvc5']],
     'solve_external_z3': [data[0]['solve_external_z3']],
 }
+
 
 
 merged_data = {} # {benchmark_name: { test_name: [result1, result2, ...], test_name2: ...}}
@@ -120,6 +123,26 @@ for (key, rounds) in results.items():
     merged_data[key] = data
 
 print(merged_data)
+
+keys = ['solve_external_yices']
+# keys = ['cvc5-64bit-benchmark']
+diff = ""
+
+dat_data = [["test", "data"]]
+columns = []
+for test_name in merged_data[keys[0]].keys():
+    if not test_name.endswith(diff):
+        continue
+    dis_name = test_name.replace(diff, "")
+    columns.append(dis_name)
+    dat_data.append([dis_name] + [str(merged_data[key][test_name][0]) for key in keys])
+
+for line in dat_data:
+    print("\t".join(line))
+
+print()
+print("{" + (", ".join(columns)) + "}")
+
 
 # remove HackStdHackdelBenchmark, as it is incomparable
 # del merged_data['HacksynthStdHackdelBenchmark']
