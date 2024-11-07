@@ -25,8 +25,8 @@ The following parameters can be set in the `.env` file:
 | `KEEP_TEMP` | Keep temporary files after the test run, as e. g. repo clones | `False` |
 | `CVC5_PATH` | Path to the CVC5 binary | `unspecified` |
 
-[!WARNING]
-If `venv` is used, the `.env` file is loaded as into the environment by default. After changes to the `.env` file  restart the virtual environment.
+> [!WARNING]
+> If `venv` is used, the `.env` file is loaded as into the environment by default. After changes to the `.env` file  restart the virtual environment.
 
 The following parameters can be set via the command line:
 | Parameter | Description | Default |
