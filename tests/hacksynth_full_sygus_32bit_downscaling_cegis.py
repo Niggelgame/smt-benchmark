@@ -10,7 +10,6 @@ class HacksynthHackdelFullSygus(HackSynthBenchmark_Base):
     def get_test_set(self):
         return 'hackdel_sygus'
     
-
     def get_run_params(self):
         return super().get_run_params() + ["--const_mode SET"]
 
