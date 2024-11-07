@@ -7,8 +7,8 @@ class HacksynthDownscalingCegis(HackSynthBenchmarkDownscaling_Base):
         base["description"] = "hacksynth benchmark, with downscaling, where second stage uses cegis"
         return base
     
-    def get_test_runner(self):
-        return 'bitvec_benchmarks/hackdel.py'
+    def get_test_set(self):
+        return 'hackdel'
     
     def get_git_info(self):
         base = super().get_git_info()
@@ -16,7 +16,7 @@ class HacksynthDownscalingCegis(HackSynthBenchmarkDownscaling_Base):
         return base
 
     def get_params(self):
-        return super().get_params() + ["-s synth_constants_cegis_stage"]
+        return ["synth:downscale-synth", "--synth.constant_finder_use_cegis"]
     
 def create_test():
     return HacksynthDownscalingCegis()

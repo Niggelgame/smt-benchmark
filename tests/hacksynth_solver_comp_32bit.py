@@ -6,8 +6,8 @@ class HacksynthSolverComp32(HacksynthSolverComp):
         base["name"] = "HacksynthSolverComp32"
         return base
     
-    def get_params(self):
-        return super().get_params() + ["-b 32"]
+    def get_set_params(self):
+        return super().get_set_params() + ["--set.bit_width 32"]
 
     
     

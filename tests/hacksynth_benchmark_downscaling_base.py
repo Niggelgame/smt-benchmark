@@ -49,8 +49,8 @@ class HackSynthBenchmarkDownscaling_Base(HackSynthBenchmark_Base):
             self.log(f"Warning: Stats File {json_path} not found", 1)
         
 
-    def get_params(self):
-        return super().get_params() + ["--stats"]
+    def get_run_params(self):
+        return super().get_run_params() + ["--stats"]
 
     def run_test(self):
         results = super().run_test()

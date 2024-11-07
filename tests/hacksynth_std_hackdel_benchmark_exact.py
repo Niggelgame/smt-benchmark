@@ -6,11 +6,11 @@ class HacksynthStdHackdelBenchmark(HackSynthBenchmark_Base):
         base["name"] = "HacksynthStdHackdelBenchmarkExact"
         return base
     
-    def get_test_runner(self):
-        return 'bitvec_benchmarks/hackdel.py'
+    def get_test_set(self):
+        return 'hackdel'
     
     def get_params(self):
-        return super().get_params() + ["-x"]
+        return super().get_params() + ["--synth.exact"]
     
     
 def create_test():

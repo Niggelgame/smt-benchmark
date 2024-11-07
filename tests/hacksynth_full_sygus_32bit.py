@@ -7,12 +7,14 @@ class HacksynthHackdelFullSygus(HackSynthBenchmark_Base):
         base["description"] = "hacksynth benchmark, test cases are SyGuS benchmarks"
         return base
     
-    def get_test_runner(self):
-        return 'bitvec_benchmarks/from_sygus_spec_hackdel_32bit.py'
+    def get_test_set(self):
+        return 'hackdel_sygus'
     
+    def get_run_params(self):
+        return super().get_run_params() + ["--const_mode SET"]
 
-    def get_params(self):
-        return super().get_params() + ['-c SET']
+    def get_set_params(self):
+        return super().get_set_params() + ["--set.bit_width 32"]
     
 def create_test():
     return HacksynthHackdelFullSygus()

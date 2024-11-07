@@ -6,11 +6,14 @@ class HacksynthStdHackdelBenchmark(HackSynthBenchmark_Base):
         base["name"] = "HacksynthStdHackdelBenchmarkBrahma"
         return base
     
+    def get_run_params(self):
+        return super().get_run_params() + ["--difficulty 40"]
+
     def get_params(self):
-        return super().get_params() + ["-s synth_brahma -y 40"]
+        return ["synth:brahma-iterate"]
     
-    def get_test_runner(self):
-        return 'bitvec_benchmarks/hackdel.py'
+    def get_test_set(self):
+        return 'hackdel'
     
 def create_test():
     return HacksynthStdHackdelBenchmark()

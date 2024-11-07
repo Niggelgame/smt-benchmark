@@ -6,14 +6,11 @@ class HacksynthSolverCompConstantModesFree(HacksynthSolverComp):
         base["name"] = "HacksynthSolverCompConstantModesCount"
         return base
     
-    def get_solver_file(self):
-        return 'synth_n_copy'
+    def get_test_set(self):
+        return 'hackdel'
     
-    def get_test_runner(self):
-        return 'bitvec_benchmarks/hackdel.py'
-    
-    def get_params(self):
-        return super().get_params() + ['-c COUNT']
+    def get_run_params(self):
+        return super().get_run_params() + ["--const_mode COUNT"]
     
     
 def create_test():

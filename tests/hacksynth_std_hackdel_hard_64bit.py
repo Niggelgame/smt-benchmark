@@ -6,11 +6,14 @@ class HacksynthStdHackdelBenchmark(HackSynthBenchmark_Base):
         base["name"] = "HacksynthStdHackdelBenchmark64"
         return base
     
-    def get_test_runner(self):
-        return 'bitvec_benchmarks/hackdel.py'
+    def get_test_set(self):
+        return 'hackdel'
     
-    def get_params(self):
-        return super().get_params() + ["-y 40 -c FREE", "-b 64"]
+    def get_run_params(self):
+        return super().get_run_params() + ["--difficulty 40 --const_mode FREE"]
+
+    def get_set_params(self):
+        return super().get_set_params() + ["--set.bit_width 64"]
     
 def create_test():
     return HacksynthStdHackdelBenchmark()

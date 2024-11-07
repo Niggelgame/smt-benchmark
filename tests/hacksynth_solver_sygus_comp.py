@@ -6,11 +6,11 @@ class HacksynthSolverSygusComp(HacksynthSolverComp):
         base["name"] = "HacksynthSolverSygusComp"
         return base
     
-    def get_test_runner(self):
-        return 'bitvec_benchmarks/from_sygus_spec_hackdel.py'
+    def get_test_set(self):
+        return 'hackdel_sygus'
     
     def get_params(self):
-        return super().get_params() +  ['-c SET']
+        return super().get_params() + ['-c SET']
     
 
     

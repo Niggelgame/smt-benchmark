@@ -7,12 +7,12 @@ class HacksynthHackdelExtendedSygus(HackSynthBenchmark_Base):
         base["description"] = "hacksynth benchmark, test cases are extended by restrictions from SyGuS benchmarks"
         return base
     
-    def get_test_runner(self):
-        return 'bitvec_benchmarks/hackdel_sygus_spec.py'
+    def get_test_set(self):
+        return 'hackdel_sygus_own_spec'
     
 
-    def get_params(self):
-        return ['-c SET']
+    def get_run_params(self):
+        return super().get_run_params() + ["--const_mode SET"]
 
 def create_test():
     return HacksynthHackdelExtendedSygus()

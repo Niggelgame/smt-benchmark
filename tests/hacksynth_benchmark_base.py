@@ -13,11 +13,18 @@ class HackSynthBenchmark_Base(TestBase):
             "commit": "latest",
         }
     
-    def get_test_runner(self):
-        return "bitvec_benchmarks/hackdel.py"
+    def get_test_set(self):
+        return "hackdel"
     
-    def get_params(self):
+    def get_set_params(self):
         return []
+    
+    def get_run_params(self):
+        return ["--print_prg"]
+
+    def get_params(self):
+        # use default solver
+        return ["synth:len-cegis"]
     
     def get_info(self):
         return {
@@ -67,7 +74,7 @@ class HackSynthBenchmark_Base(TestBase):
             python = utils.get_own_python_executable()
 
             # get all test cases
-            script = f"""cd {repo_path} && {python} {self.get_test_runner()} -T"""
+            script = f"""cd {repo_path} && {python} benchmark.py list set:{self.get_test_set()}"""
             self.log(f"Running command: {script}", 2)
             try:
                 p = subprocess.run(script, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -76,8 +83,8 @@ class HackSynthBenchmark_Base(TestBase):
                 results = "error"
                 return
             output = p.stdout.decode('utf-8')
-            # split output by comma for each test case as specified by "-T"
-            test_cases = output.strip().split(",")
+            # split output by new line for each test case as specified by "-T"; then remove the "test_" prefix
+            test_cases = [ test[5:] for test in output.strip().split("\n") ]
             return test_cases
 
     def success_output(self, bench_path, testcase):
@@ -96,7 +103,7 @@ class HackSynthBenchmark_Base(TestBase):
             for test_case in test_cases:
                 self.log(f"Running test: {test_case}", 1)
                 with utils.timer() as elapsed:
-                    script = f"""cd {path} && timeout -s SIGKILL {utils.get_test_timeout()} {python} {self.get_test_runner()} -t {test_case} {' '.join(self.get_params())}"""
+                    script = f"""cd {path} && timeout -s SIGKILL {utils.get_test_timeout()} {python} benchmark.py run {' '.join(self.get_run_params())} --tests {test_case} set:{self.get_test_set()} {' '.join(self.get_set_params())} {' '.join(self.get_params())}"""
                     self.log(f"Running command: {script}", 2)
                     try:
                         p = subprocess.run(script, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -111,7 +118,7 @@ class HackSynthBenchmark_Base(TestBase):
                         self.log(f"timed out", 1)
                         results[test_case] = "timeout"
                     else:
-                        self.log(f"Output: {output}", 3)
+                        self.log(f"Output: {output}", 2)
                         results[test_case] = elapsed()
                         self.success_output(path, test_case)
             

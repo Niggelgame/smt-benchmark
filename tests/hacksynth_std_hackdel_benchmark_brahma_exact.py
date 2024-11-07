@@ -7,10 +7,10 @@ class HacksynthStdHackdelBenchmark(HackSynthBenchmark_Base):
         return base
     
     def get_params(self):
-        return super().get_params() + ["-s synth_brahma -x"]
+        return ["synth:brahma-exact"]
     
-    def get_test_runner(self):
-        return 'bitvec_benchmarks/hackdel.py'
+    def get_test_set(self):
+        return 'hackdel'
     
 def create_test():
     return HacksynthStdHackdelBenchmark()
