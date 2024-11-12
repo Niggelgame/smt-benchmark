@@ -7,7 +7,7 @@ class HacksynthStdHackdelBenchmark(HackSynthBenchmark_Base):
         return base
     
     def get_params(self):
-        return super().get_params() + ["synth:brahma-paper"]
+        return ["synth:brahma-paper"]
     
     def get_test_set(self):
         return 'hackdel'

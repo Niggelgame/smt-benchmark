@@ -7,7 +7,7 @@ class HacksynthSolverSygusComp(HacksynthSolverComp):
         return base
     
     def get_test_set(self):
-        return 'hackdel_sygus'
+        return 'hackdel-sygus'
     
     def get_params(self):
         return super().get_params() + ['-c SET']
