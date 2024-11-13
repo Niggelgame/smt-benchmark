@@ -9,8 +9,8 @@ class HacksynthSolverSygusComp(HacksynthSolverComp):
     def get_test_set(self):
         return 'hackdel-sygus'
     
-    def get_params(self):
-        return super().get_params() + ['-c SET']
+    def get_run_params(self):
+        return super().get_run_params() + ["--const_mode SET"]
     
 
     
