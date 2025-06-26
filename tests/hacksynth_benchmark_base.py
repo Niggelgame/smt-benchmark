@@ -103,7 +103,7 @@ class HackSynthBenchmark_Base(TestBase):
             for test_case in test_cases:
                 self.log(f"Running test: {test_case}", 1)
                 with utils.timer() as elapsed:
-                    script = f"""cd {path} && timeout -s SIGKILL {utils.get_test_timeout()} {python} benchmark.py run {' '.join(self.get_run_params())} --tests {test_case} set:{self.get_test_set()} {' '.join(self.get_set_params())} {' '.join(self.get_params())}"""
+                    script = f"""cd {path} && timeout -s SIGKILL {utils.get_test_timeout()} {python} benchmark.py run {' '.join(self.get_run_params())} --include {test_case} set:{self.get_test_set()} {' '.join(self.get_set_params())} {' '.join(self.get_params())}"""
                     self.log(f"Running command: {script}", 2)
                     try:
                         p = subprocess.run(script, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
