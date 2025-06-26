@@ -6,11 +6,12 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-venv \
     python3-pip \
-    python3-meson \
     software-properties-common \
     unzip \
     ninja-build \
-    wget
+    wget \
+    m4 \
+    git
 
 # Install build tool 
 RUN pip install meson --break-system-packages
@@ -33,10 +34,22 @@ RUN cd /tmp && \
 
 # Install Bitwuzla
 RUN cd /tmp && \
-    wget https://github.com/bitwuzla/bitwuzla/archive/refs/tags/0.5.0.zip && \
-    unzip 0.5.0.zip && \
-    cd bitwuzla-0.5.0 && \
-    ./configure.sh && \
-    
+    wget https://github.com/bitwuzla/bitwuzla/archive/refs/tags/0.8.0.zip && \
+    unzip 0.8.0.zip && \
+    cd bitwuzla-0.8.0 && \
+    ./configure.py && \
+    cd build && ninja install
+
+# Copy the test application into the image
+COPY . /app
+
+WORKDIR /app
+
+# Create a virtual environment and install the application dependencies
+RUN python3 -m venv venv && \
+    . venv/bin/activate && \
+    pip install --upgrade pip && \
+    pip install -r requirements.txt --break-system-packages
 
 
+# Run tests: LOG_LEVEL=5 TIMEOUT=10s KEEP_TEMP=True python3 test_runner.py
