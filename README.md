@@ -55,3 +55,19 @@ pip freeze > requirements.txt
 ## Visualizing the results
 
 The benchmark results are in the form of a JSON file. The `script` directory contains samples of how this data can be used to create visualizations using `matplotlib`.
+
+
+
+## Running in Docker
+The repository can be run in a amd64 Docker container. The `Dockerfile` is set up to install 
+the required dependencies.
+
+To build the docker image, run in the repository directory 
+
+`docker build . -t buildsmtbench`
+
+To then interactively use it, run 
+
+`docker run -it --rm buildsmtbench bash`
+
+You can then enter the preinstalled venv using `source venv/bin/activate` and run the tests as described above.
