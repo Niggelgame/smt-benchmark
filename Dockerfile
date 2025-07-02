@@ -52,4 +52,4 @@ RUN python3 -m venv venv && \
     pip install -r requirements.txt --break-system-packages
 
 
-# Run tests: LOG_LEVEL=5 TIMEOUT=10s KEEP_TEMP=True CVC5_PATH=cvc5 python3 test_runner.py
+# Run tests: LOG_LEVEL=5 TIMEOUT=10s KEEP_TEMP=True CVC5_PATH=cvc5 python3 test_runner.py -i -o results.json
