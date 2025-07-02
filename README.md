@@ -71,3 +71,8 @@ To then interactively use it, run
 `docker run -it --rm buildsmtbench bash`
 
 You can then enter the preinstalled venv using `source venv/bin/activate` and run the tests as described above.
+
+## TODOs
+
+[ ] Detect "None" in Synth -> do not output exit code 0
+[ ] Add script to generate comparison graphs directly from test outputs

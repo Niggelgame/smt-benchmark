@@ -18,7 +18,7 @@ class HacksynthOptimizeDepthOptimizerOptimize(HackSynthBenchmark_Base):
 
     def get_params(self):
         # Fixed length of 8, as this is the maximal length required
-        return ["synth:opt-cegis", "--synth.size_range 8 8", "synth.optimizer:depth-optimization"]
+        return ["synth:opt-cegis", "--synth.size_range 8 8", "synth.optimizer:depth"]
     
 def create_test():
     return HacksynthOptimizeDepthOptimizerOptimize()

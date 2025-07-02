@@ -22,7 +22,7 @@ class HacksynthDownscalingFA(HackSynthBenchmarkDownscaling_Base):
         return super().get_set_params() + ["--set.bit_width 32"]
 
     def get_params(self):
-        return ["synth:downscale-synth", "--synth.no-constant_finder_use_cegis"]
+        return ["synth:downscale", "--synth.no-constant_finder_use_cegis"]
 
     
 def create_test():

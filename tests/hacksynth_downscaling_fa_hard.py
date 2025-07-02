@@ -19,7 +19,7 @@ class HacksynthDownscalingFA(HackSynthBenchmarkDownscaling_Base):
         return super().get_run_params() + ["--difficulty 40 --const_mode FREE"]
 
     def get_params(self):
-        return ["synth:downscale-synth", "--synth.no-constant_finder_use_cegis"]
+        return ["synth:downscale", "--synth.no-constant_finder_use_cegis"]
     
 def create_test():
     return HacksynthDownscalingFA()

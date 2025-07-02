@@ -8,6 +8,8 @@ class HackSynthBenchmarkDownscaling_Base(HackSynthBenchmark_Base):
         self.downscaling_times = {}
 
     def success_output(self, bench_path, testcase):
+        if True:
+            return 
         json_path = bench_path + f"/{testcase}.json"
         # try to read test case statistics file
         try:

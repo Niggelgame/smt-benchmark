@@ -17,7 +17,7 @@ class HacksynthHackdelFullSygus(HackSynthBenchmarkDownscaling_Base):
         return super().get_set_params() + ["--set.bit_width 64"]
 
     def get_params(self):
-        return ["synth:downscale-synth", "--synth.constant_finder_use_cegis"]
+        return ["synth:downscale", "--synth.constant_finder_use_cegis"]
     
 def create_test():
     return HacksynthHackdelFullSygus()
